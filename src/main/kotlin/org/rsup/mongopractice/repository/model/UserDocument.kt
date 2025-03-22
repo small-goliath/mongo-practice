@@ -14,5 +14,8 @@ data class UserDocument(
     val name: String,
 
     @DocumentReference
-    var income: IncomeDocument? = null
+    var incomeDocument: IncomeDocument? = null,
+
+    @DocumentReference
+    val deviceDocuments: List<DeviceDocument> = listOf()
 )

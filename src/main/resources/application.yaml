@@ -4,3 +4,6 @@ spring:
     mongodb:
       uri: mongodb://admin:admin@localhost:27017
       database: prac
+logging:
+  level:
+    root: debug

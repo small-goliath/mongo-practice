@@ -13,7 +13,7 @@ class IncomeService(private val userRepository: UserRepository, private val inco
         val userDocument = userRepository.findById(createIncomeRequestVO.userId)
             .orElseThrow()
         val incomeDocument = IncomeDocument(salary = createIncomeRequestVO.salary, stock = createIncomeRequestVO.stock, userDocument = userDocument)
-        userDocument.income = incomeDocument
+        userDocument.incomeDocument = incomeDocument
 
         incomeRepository.save(incomeDocument)
         userRepository.save(userDocument)
