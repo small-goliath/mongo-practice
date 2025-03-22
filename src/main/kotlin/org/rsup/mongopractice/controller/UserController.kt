@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/users")
-class UserController(val userService: UserService) {
+class UserController(private val userService: UserService) {
 
     @PostMapping
     fun create(@RequestBody createUserRequestVO: CreateUserRequestVO) {
