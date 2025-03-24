@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mongodb:
     image: mongo:latest
@@ -5,8 +7,26 @@ services:
     restart: always
     ports:
       - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - mongo-network
+
+  mongo-setup:
+    image: mongo:latest
+    container_name: mongo-setup
+    depends_on:
+      - mongodb
+    networks:
+      - mongo-network
+    entrypoint: [ "bash", "-c", "sleep 5 && mongosh --host mongodb:27017 /scripts/initiateReplicaSet.js" ]
+    volumes:
+      - ./scripts:/scripts
+
+volumes:
+  mongodb_data:
+
+networks:
+  mongo-network:
+    driver: bridge

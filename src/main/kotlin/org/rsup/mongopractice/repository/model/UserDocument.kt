@@ -17,5 +17,5 @@ data class UserDocument(
     var incomeDocument: IncomeDocument? = null,
 
     @DocumentReference
-    val deviceDocuments: List<DeviceDocument> = listOf()
+    val deviceDocuments: MutableList<DeviceDocument> = mutableListOf()
 )

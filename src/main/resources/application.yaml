@@ -2,7 +2,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://admin:admin@localhost:27017
+      uri: mongodb://admin:admin@localhost:27017/prac?replicaSet=rs0&authSource=admin
       database: prac
 logging:
   level:
