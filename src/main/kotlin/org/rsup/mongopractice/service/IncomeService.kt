@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class IncomeService(private val userRepository: UserRepository, private val incomeRepository: IncomeRepository) {
 
-    @Transactional
     fun create(createIncomeRequestVO: CreateIncomeRequestVO) {
         val userDocument = userRepository.findById(createIncomeRequestVO.userId)
             .orElseThrow()
@@ -19,7 +18,5 @@ class IncomeService(private val userRepository: UserRepository, private val inco
 
         incomeRepository.save(incomeDocument)
         userRepository.save(userDocument)
-
-//        throw RuntimeException("트랜잭션!!!")
     }
 }

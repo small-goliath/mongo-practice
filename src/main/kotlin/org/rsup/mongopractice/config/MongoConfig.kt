@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.MongoTransactionManager
 @Configuration
 class MongoConfig {
 
-    @Bean
-    fun transactionManager(dbFactory: MongoDatabaseFactory): MongoTransactionManager {
-        return MongoTransactionManager(dbFactory)
-    }
+//    @Bean
+//    fun transactionManager(dbFactory: MongoDatabaseFactory): MongoTransactionManager {
+//        return MongoTransactionManager(dbFactory)
+//    }
 }

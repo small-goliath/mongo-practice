@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class DeviceService(private val userRepository: UserRepository, private val deviceRepository: DeviceRepository) {
 
-    @Transactional
     fun create(createDeviceRequestVO: CreateDeviceRequestVO) {
         val userDocument = userRepository.findById(createDeviceRequestVO.userId)
             .orElseThrow()
@@ -20,7 +19,19 @@ class DeviceService(private val userRepository: UserRepository, private val devi
 
         deviceRepository.save(deviceDocument)
         userRepository.save(userDocument)
+    }
 
-        throw RuntimeException("트랜잭션!!!")
+    @Transactional
+    fun createWithTransaction(createDeviceRequestVO: CreateDeviceRequestVO) {
+        val userDocument = userRepository.findById(createDeviceRequestVO.userId)
+            .orElseThrow()
+
+        val deviceDocument = DeviceDocument(name = createDeviceRequestVO.name, userId = createDeviceRequestVO.userId)
+        userDocument.deviceDocuments.add(deviceDocument)
+
+        deviceRepository.save(deviceDocument)
+        userRepository.save(userDocument)
+
+        throw RuntimeException("트랜잭션 롤백!!!")
     }
 }

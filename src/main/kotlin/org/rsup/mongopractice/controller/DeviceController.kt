@@ -16,4 +16,12 @@ class DeviceController(private val deviceService: DeviceService) {
         println("장비를 할당합니다: $createDeviceRequestVO")
         deviceService.create(createDeviceRequestVO)
     }
+
+    @PostMapping("/transaction")
+    fun createWithTransaction(@RequestBody createDeviceRequestVO: CreateDeviceRequestVO) {
+        println("장비 할당 실패합니다: $createDeviceRequestVO")
+        deviceService.createWithTransaction(createDeviceRequestVO)
+    }
+
+
 }
